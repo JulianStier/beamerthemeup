@@ -1,0 +1,718 @@
+% Theme for Uni Passau
+% 2021 Julian Stier
+%
+% based on
+% https://github.com/weberval/HFU
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\RequirePackage{calc}
+\RequirePackage{etoolbox}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[LGR, T1]{fontenc}
+\RequirePackage{datetime2}
+\RequirePackage{thmtools}
+\RequirePackage{tikz}
+\hypersetup{colorlinks,
+            urlcolor  = UPdarkblue,
+            linkcolor =,
+            citecolor =}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Standard headers:
+\DeclareOptionBeamer{american}
+{
+    \def \UPlang {eng}
+    \def \UPlangII {american}
+}
+\DeclareOptionBeamer{english}
+{
+    \def \UPlang {eng}
+    \def \UPlangII {english}
+}
+\DeclareOptionBeamer{UKenglish}
+{
+    \def \UPlang {eng}
+    \def \UPlangII {UKenglish}
+}
+\DeclareOptionBeamer{USenglish}
+{
+    \def \UPlang {eng}
+    \def \UPlangII {USenglish}
+}
+\DeclareOptionBeamer{german}
+{
+    \def \UPlang {de}
+    \def \UPlangII {ngerman}
+}
+\urlstyle{same}
+
+%% Vertical text alignment:
+\DeclareOptionBeamer{c}{ \beamer@centeredtrue  }
+\DeclareOptionBeamer{t}{ \beamer@centeredfalse }
+
+
+%% Theorem numbers:
+\DeclareOptionBeamer{unnumbered}{ \def \UPtheorem {}          }
+\DeclareOptionBeamer{numbered}  { \def \UPtheorem {numbered}  }
+\DeclareOptionBeamer{AMS}       { \def \UPtheorem {ams style} }
+
+
+%% Font:
+\providebool{neohellenic}
+\providebool{latinmodern}
+\DeclareOptionBeamer{SansSerif}
+{
+    \def \UPfont {default}
+    \setbool{neohellenic}{true}
+    \setbool{latinmodern}{false}
+    \AtBeginDocument{\sbox0{\(\mathsf{\xdef\mathsfgroup{\the\mathgroup}}\)}}
+    \def\operator@font{\mathgroup\mathsfgroup}
+}
+\DeclareOptionBeamer{UPSerif}
+{
+    \def \UPfont {professionalfonts}
+    \setbool{neohellenic}{false}
+    \setbool{latinmodern}{false}
+    \AtBeginDocument{\sbox0{\(\mathrm{\xdef\mathrmgroup{\the\mathgroup}}\)}}
+    \def\operator@font{\mathgroup\mathrmgroup}
+}
+\DeclareOptionBeamer{Serif}
+{
+    \def \UPfont {serif}
+    \setbool{neohellenic}{false}
+    \setbool{latinmodern}{true}
+    \AtBeginDocument{\sbox0{\(\mathrm{\xdef\mathrmgroup{\the\mathgroup}}\)}}
+    \def\operator@font{\mathgroup\mathrmgroup}
+}
+
+
+%% Automatic title frame:
+\DeclareOptionBeamer{TitlePage} { \def \UPfirstframe {\TitlePage}  }
+\DeclareOptionBeamer{NoTitlePage} { \def \UPfirstframe {} }
+
+%% Top Logo positioning
+\providebool{logotop}
+\DeclareOptionBeamer{logotop}{
+    \setbool{logotop}{true}
+}
+
+\ExecuteOptionsBeamer{english}
+\ExecuteOptionsBeamer{t}
+\ExecuteOptionsBeamer{unnumbered}
+\ExecuteOptionsBeamer{SansSerif}
+\ExecuteOptionsBeamer{TitlePage}
+\ProcessOptionsBeamer
+
+
+\AtBeginDocument{ \UPfirstframe }
+
+
+\RequirePackage[\UPlangII]{babel}
+
+
+% Use a neohellenic font from the Greek Font Society
+% for small, greek letters. It is a sans serif that
+% matches Helvetica better in style and weight than
+% the standard Computer Modern.
+\ifbool{neohellenic}
+{
+    \DeclareSymbolFont{neomath}{OML}{neohellenic}{m}{n}
+    \DeclareMathSymbol{\alpha}\mathord{neomath}{"0B}
+    \DeclareMathSymbol{\beta}\mathord{neomath}{"0C}
+    \DeclareMathSymbol{\gamma}\mathord{neomath}{"0D}
+    \DeclareMathSymbol{\delta}\mathord{neomath}{"0E}
+    \DeclareMathSymbol{\epsilon}\mathord{neomath}{"0F}
+    \DeclareMathSymbol{\zeta}\mathord{neomath}{"10}
+    \DeclareMathSymbol{\eta}\mathord{neomath}{"11}
+    \DeclareMathSymbol{\theta}\mathord{neomath}{"12}
+    \DeclareMathSymbol{\theta}\mathord{neomath}{"12}
+    \DeclareMathSymbol{\iota}\mathord{neomath}{"13}
+    \DeclareMathSymbol{\kappa}\mathord{neomath}{"14}
+    \DeclareMathSymbol{\lambda}\mathord{neomath}{"15}
+    \DeclareMathSymbol{\mu}\mathord{neomath}{"16}
+    \DeclareMathSymbol{\nu}\mathord{neomath}{"17}
+    \DeclareMathSymbol{\xi}\mathord{neomath}{"18}
+    \DeclareMathSymbol{\pi}\mathord{neomath}{"19}
+    \DeclareMathSymbol{\rho}\mathord{neomath}{"1A}
+    \DeclareMathSymbol{\sigma}\mathord{neomath}{"1B}
+    \DeclareMathSymbol{\tau}\mathord{neomath}{"1C}
+    \DeclareMathSymbol{\upsilon}\mathord{neomath}{"1D}
+    \DeclareMathSymbol{\phi}\mathord{neomath}{"1E}
+    \DeclareMathSymbol{\chi}\mathord{neomath}{"1F}
+    \DeclareMathSymbol{\psi}\mathord{neomath}{"20}
+    \DeclareMathSymbol{\omega}\mathord{neomath}{"21}
+    \DeclareMathSymbol{\varepsilon}\mathord{neomath}{"22}
+    \DeclareMathSymbol{\vartheta}\mathord{neomath}{"23}
+    \DeclareMathSymbol{\varpi}\mathord{neomath}{"24}
+    \DeclareMathSymbol{\varrho}\mathord{neomath}{"25}
+    \DeclareMathSymbol{\varsigma}\mathord{neomath}{"26}
+    \DeclareMathSymbol{\varphi}\mathord{neomath}{"27}
+}
+{}
+
+\ifbool{latinmodern}
+{
+    \renewcommand{\rmdefault}{lmr} % Latin Modern Roman
+}
+{
+   \renewcommand{\rmdefault}{pbk}  % Bookman
+}
+
+\renewcommand{\sfdefault}{phv} % Helvetica
+\renewcommand{\ttdefault}{pcr} % Courier
+
+
+%% Allow more stretching
+\setlength{\emergencystretch}{3em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Official colours:
+\definecolor{UPorange}{HTML}{f39200}
+\definecolor{UPorange70}{HTML}{ffc266}
+\definecolor{UPorange2}{HTML}{fd8900}
+\definecolor{UPyellorange}{HTML}{fcbc6e}
+\definecolor{UPdarkblue}{rgb}{0.04, 0.16, 0.32}
+\definecolor{UPblue}{cmyk}{1.0, 0.5, 0.0, 0.0}
+\definecolor{UPlightblue}{cmyk}{0.7, 0.35, 0.0, 0.0}
+\definecolor{UPdarkgray}{HTML}{626262}
+\definecolor{UPlightgray}{HTML}{f1f1f1}
+\definecolor{UPmediumgray}{HTML}{d5d5d5}
+\definecolor{UPapplegreen}{HTML}{61993b}
+\definecolor{UPopalgreen} {HTML}{005f4e}
+\definecolor{UPlightgray2} {HTML}{c1c6c8}
+\definecolor{UPanthrazit} {HTML}{5b6770}
+\definecolor{UPlink}      {HTML}{61993b}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\mode<presentation>
+
+
+\useinnertheme{rectangles}
+\usefonttheme{\UPfont}
+
+
+\setbeamertemplate{theorems}[\UPtheorem]
+\setbeamertemplate{qed symbol}{\(\blacksquare\)}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption label separator}{: }
+\setbeamersize{text margin left  = 3.845mm,
+               text margin right = 3.845mm}
+
+
+%% Standard colours:
+\colorlet{alert}{UPapplegreen}
+\setbeamercolor{structure}{fg = UPorange}
+\setbeamercolor{block title}{fg = white,
+                             bg = UPanthrazit}
+\setbeamercolor{block body} {bg = UPlightgray}
+\setbeamercolor{block title example}{fg = white,
+                                     bg = UPdarkgray}
+\setbeamercolor{block body example} {bg = UPlightgray}
+\setbeamercolor{block title alerted}{fg = white,
+                                     bg = UPlightblue}
+\setbeamercolor{block body alerted} {bg = UPlightgray}
+\setbeamercolor{alerted text} {fg = UPlightblue}
+\setbeamercolor{footnote mark}{fg = UPopalgreen}
+\setbeamercolor{section in head/foot}{fg = UPdarkgray,
+                                      bg = UPlightgray}
+\setbeamercolor{section in toc}{fg = black}
+\setbeamercolor{bibliography entry location}{fg = structure}
+
+
+%% Custom colours:
+\setbeamercolor*{section page}{fg = white, bg = structure}
+\setbeamercolor{section page alt}{fg = UPorange, bg = white}
+
+%% Standard fonts:
+\setbeamerfont{author}    {size   = \LARGE,
+                           series = \normalfont\bfseries}
+\setbeamerfont{date}      {size   = \large,
+                            series = \normalfont\mdseries}
+\setbeamerfont{title}     {size   = \huge,
+                           series = \bfseries}
+\setbeamerfont{subtitle}  {size   = \LARGE,
+                           series = \normalfont\mdseries}
+\setbeamerfont{frametitle}{size = \LARGE,
+                           series = \bfseries}
+\setbeamerfont{title in head/foot} {series = \bfseries}
+\setbeamerfont{author in head/foot}{series = \bfseries}
+\setbeamerfont{date in head/foot}  {series = \bfseries}
+\setbeamerfont{section in toc}     {series = \bfseries}
+
+
+%% Custom fonts:
+\setbeamerfont*{section page}{size   = \Huge,
+                              series = \bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{title page}
+{
+    \begin{center}
+        \usebeamerfont{title}
+        \inserttitle
+        \\
+        \usebeamerfont{subtitle}
+        \insertsubtitle
+    \end{center}
+    \begin{beamercolorbox}[wd        = \paperwidth,
+                           ht        = 11 mm,
+                           dp        = \dimexpr 0.4\paperheight - 11 mm \relax,
+                           leftskip  = 1 em,
+                           rightskip = 1 em]
+                          {section in head/foot}
+        \begin{minipage}[t][0.28\paperheight]{\textwidth}
+            \centering
+            \usebeamerfont{author}
+            \insertauthor
+            \\
+            \usebeamerfont{date}
+            \vspace{0.5ex}
+            \insertdate
+            \vfill
+            \hfill
+            \includegraphics[height = 0.12\paperheight]{images/Logo_zentral_farbig_EN.png}
+        \end{minipage}
+    \end{beamercolorbox}
+    \vspace*{-1.3em}
+}
+
+
+\newcommand{\TitlePage}
+{{
+    \begin{frame}[b, plain, noframenumbering]
+        \titlepage
+    \end{frame}
+}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{frametitle}
+{
+    \vbox
+    {
+        \strut\insertframetitle\strut
+    }
+    %\vskip-1.3ex
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{headline}{ \vspace*{1.7 mm} }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{footline}
+{
+    \leavevmode
+    \hbox
+    {%
+        \begin{beamercolorbox}[wd = 0.33\paperwidth,
+                               ht = 2.25ex,
+                               dp = 1ex,
+                               rightskip=.3cm plus1fill]
+                              {section in head/foot}
+                \usebeamerfont{author in head/foot}
+                \hspace*{5ex}
+                \insertshortauthor
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd = 0.34\paperwidth,
+                               ht = 2.25ex,
+                               dp = 1ex,
+                               leftskip=.3cm plus1fill,
+                               rightskip=.3cm plus1fill]
+                              {section in head/foot}
+                \usebeamerfont{title in head/foot}
+                \insertshorttitle
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd = 0.33\paperwidth,
+                               ht = 2.25ex,
+                               dp = 1ex,
+                               leftskip=.3cm plus1fill]
+                              {section in head/foot}
+                \usebeamerfont{date in head/foot}
+                \insertshortdate
+                \hspace*{2em}
+                \insertframenumber{} / \inserttotalframenumber
+                \hspace*{5ex}
+        \end{beamercolorbox}
+    }
+    \vskip0pt
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\hidelogo}{\logo{}}
+\newcommand{\showlogo}{
+    \logo{
+        \ifbool{logotop}{
+            % logo right top
+            \pgfputat{\pgfxy(-0.07,7.3)}{\llap{\includegraphics[height = 0.08\paperheight]{images/Logo_zentral_farbig_EN.png}}}
+        }{
+            % logo right bottom
+            \includegraphics[height = 0.08\paperheight]{images/Logo_zentral_farbig_EN.png}
+        }
+    }
+}
+\showlogo
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Redefine blocks with larger indentations,
+%% and some environmental colours:
+\setbeamertemplate{block begin}
+{
+    \setbeamercolor{itemize item}      {fg = block title.bg}
+    \setbeamercolor{itemize subitem}   {fg = block title.bg}
+    \setbeamercolor{itemize subsubitem}{fg = block title.bg}
+    \setbeamercolor{item projected}{fg = block title.fg,
+                                    bg = block title.bg}
+    \setbeamercolor{description item}{fg = alert}
+    \setbeamercolor{caption name}    {fg = alert}
+
+    \unskip
+    \vskip1.3ex
+
+    \begin{beamercolorbox}[ht        = 2.4  ex,
+                           dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex]
+                          {block title}
+
+        \usebeamerfont*{block title}
+        \insertblocktitle
+    \end{beamercolorbox}
+
+    \nointerlineskip
+
+    \usebeamerfont{block body}
+    \begin{beamercolorbox}[dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex,
+                           vmode]
+                          {block body}
+        \vspace*{1ex}
+        \begin{minipage}{\textwidth - 1.5ex}
+}
+
+\setbeamertemplate{block end}
+{
+        \end{minipage}
+    \vskip0pt
+    \end{beamercolorbox}
+    \vskip1.3ex
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{block example begin}
+{
+    \setbeamercolor{itemize item}      {fg = block title example.bg}
+    \setbeamercolor{itemize subitem}   {fg = block title example.bg}
+    \setbeamercolor{itemize subsubitem}{fg = block title example.bg}
+    \setbeamercolor{item projected}{fg = block title example.fg,
+                                    bg = block title example.bg}
+    \setbeamercolor{description item}{fg = alert}
+    \setbeamercolor{caption name}    {fg = alert}
+
+    \unskip
+    \vskip1.3ex
+
+    \begin{beamercolorbox}[ht        = 2.4  ex,
+                           dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex]
+                          {block title example}
+
+        \usebeamerfont*{block title example}
+        \insertblocktitle
+    \end{beamercolorbox}
+
+    \nointerlineskip
+
+    \usebeamerfont{block body example}
+    \begin{beamercolorbox}[dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex,
+                           vmode]
+                          {block body example}
+        \vspace*{1ex}
+        \begin{minipage}{\textwidth - 1.5ex}
+}
+
+\setbeamertemplate{block example end}
+{
+        \end{minipage}
+    \vskip0pt
+    \end{beamercolorbox}
+    \vskip1.3ex
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{block alerted begin}
+{
+    \setbeamercolor{itemize item}      {fg = block title alerted.bg}
+    \setbeamercolor{itemize subitem}   {fg = block title alerted.bg}
+    \setbeamercolor{itemize subsubitem}{fg = block title alerted.bg}
+    \setbeamercolor{item projected}{fg = block title alerted.fg,
+                                    bg = block title alerted.bg}
+    \setbeamercolor{description item}{fg = alert}
+    \setbeamercolor{caption name}    {fg = alert}
+
+    \unskip
+    \vskip1.3ex
+
+    \begin{beamercolorbox}[ht        = 2.4  ex,
+                           dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex]
+                          {block title alerted}
+
+        \usebeamerfont*{block title alerted}
+        \insertblocktitle
+    \end{beamercolorbox}
+
+    \nointerlineskip
+
+    \usebeamerfont{block body alerted}
+    \begin{beamercolorbox}[dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex,
+                           vmode]
+                          {block body alerted}
+        \vspace*{1ex}
+        \begin{minipage}{\textwidth - 1.5ex}
+}
+
+\setbeamertemplate{block alerted end}
+{
+        \end{minipage}
+    \vskip0pt
+    \end{beamercolorbox}
+    \vskip1.3ex
+
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Reference enumerate items
+\newcommand{\enumref}[1]
+{{%
+    \leavevmode\unskip
+    \def\insertenumlabel{\ref{#1}}
+    \usebeamertemplate*{enumerate item}%
+}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\setbeamertemplate{section page}
+{
+    \begin{center}
+        \vskip\baselineskip
+        \insertsection
+    \end{center}
+}
+
+\newcommand{\SectionPage}
+{{
+    \setbeamercolor{background canvas}{parent = section page}
+    \begin{frame}[c, plain, noframenumbering]
+        \sectionpage
+    \end{frame}
+}}
+
+\newcommand{\SectionPageWithText}[1]
+{{
+    \setbeamercolor{background canvas}{parent = section page}
+    \usebeamerfont{section page}
+    \usebeamercolor[fg]{section page}
+    \begin{frame}[c, plain, noframenumbering]
+        \begin{center}
+            \vskip\baselineskip
+            #1
+        \end{center}
+    \end{frame}
+}}
+
+\newcommand{\SectionPageAlt}
+{{
+    \usebeamerfont{section page}
+    \usebeamercolor[fg]{section page alt}
+    \begin{frame}[c]
+        \begin{center}
+            \vskip.75\baselineskip
+            \insertsection
+        \end{center}
+    \end{frame}
+}}
+
+\newcommand{\SectionPageAltWithText}[1]
+{{
+    \usebeamerfont{section page}
+    \usebeamercolor[fg]{section page alt}
+    \begin{frame}[c]
+        \begin{center}
+            \vskip.75\baselineskip
+            #1
+        \end{center}
+    \end{frame}
+}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand<>{\ConclusionArrow}[1]
+{{
+    \only#2{
+        \begin{tikzpicture}[line width=.2cm]
+            \tikzset{every edge/.append style = {>=stealth, align=left}}
+            \draw[UPorange,arrows={-Triangle[length=0.5cm,width=.5cm]}] (0,0) - - (1,0);
+            \node[text width=\textwidth, anchor=west, right] at (1,0) {#1};
+        \end{tikzpicture}
+    }
+}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\mode<all>
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Translate environment names to German:
+\uselanguage {\UPlang}
+\languagepath{\UPlang}
+
+\deftranslation[to = de]{assumption} {Annahme}
+\deftranslation[to = de]{Assumption} {Annahme}
+\deftranslation[to = de]{axiom}      {Axiom}
+\deftranslation[to = de]{Axiom}      {Axiom}
+\deftranslation[to = de]{calculation}{Kalkulation}
+\deftranslation[to = de]{Calculation}{Kalkulation}
+\deftranslation[to = de]{computation}{Berechnung}
+\deftranslation[to = de]{Computation}{Berechnung}
+\deftranslation[to = de]{conjecture} {Vermutung}
+\deftranslation[to = de]{Conjecture} {Vermutung}
+\deftranslation[to = de]{corollary}  {Folgerung}
+\deftranslation[to = de]{Corollary}  {Folgerung}
+\deftranslation[to = de]{definition} {Definition}
+\deftranslation[to = de]{Definition} {Definition}
+\deftranslation[to = de]{definitions}{Definitionen}
+\deftranslation[to = de]{Definitions}{Definitionen}
+\deftranslation[to = de]{example}    {Beispiel}
+\deftranslation[to = de]{Example}    {Beispiel}
+\deftranslation[to = de]{examples}   {Beispiele}
+\deftranslation[to = de]{Examples}   {Beispiele}
+\deftranslation[to = de]{fact}       {Fakt}
+\deftranslation[to = de]{Fact}       {Fakt}
+\deftranslation[to = de]{facts}      {Fakten}
+\deftranslation[to = de]{Facts}      {Fakten}
+\deftranslation[to = de]{hypothesis} {Hypothese}
+\deftranslation[to = de]{Hypothesis} {Hypothese}
+\deftranslation[to = de]{notation}   {Notation}
+\deftranslation[to = de]{Notation}   {Notation}
+\deftranslation[to = de]{observation}{Beobachtung}
+\deftranslation[to = de]{Observation}{Beobachtung}
+\deftranslation[to = de]{property}   {Eigenschaft}
+\deftranslation[to = de]{Property}   {Eigenschaft}
+\deftranslation[to = de]{proposition}{Vorschlag}
+\deftranslation[to = de]{Proposition}{Vorschlag}
+\deftranslation[to = de]{remark}     {Anmerkung}
+\deftranslation[to = de]{Remark}     {Anmerkung}
+\deftranslation[to = de]{remarks}    {Anmerkungen}
+\deftranslation[to = de]{Remarks}    {Anmerkungen}
+\deftranslation[to = de]{theorem}    {Satz}
+\deftranslation[to = de]{Theorem}    {Satz}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Define additional theorem-like environments:
+\declaretheorem[style   = plain,
+                sibling = theorem,
+                name    = {\translate[to=\UPlang]{Conjecture}}]
+                {conjecture}
+\declaretheorem[style   = plain,
+                sibling = theorem,
+                name    = {\translate[to=\UPlang]{Facts}}]
+                {facts}
+\declaretheorem[style   = plain,
+                sibling = theorem,
+                name    = {\translate[to=\UPlang]{Hypothesis}}]
+                {hypothesis}
+\declaretheorem[style   = plain,
+                sibling = theorem,
+                name    = {\translate[to=\UPlang]{Observation}}]
+                {observation}
+\declaretheorem[style   = plain,
+                sibling = theorem,
+                name    = {\translate[to=\UPlang]{Proposition}}]
+                {proposition}
+\declaretheorem[style = definition,
+                name  = {\translate[to=\UPlang]{Assumption}}]
+                {assumption}
+\declaretheorem[style = definition,
+                name  = {\translate[to=\UPlang]{Axiom}}]
+                {axiom}
+\declaretheorem[style = definition,
+                name  = {\translate[to=\UPlang]{Property}}]
+                {property}
+\declaretheorem[style    = definition,
+                numbered = no,
+                name     = {\translate[to=\UPlang]{Calculation}}]
+                {calculation}
+\declaretheorem[style    = definition,
+                numbered = no,
+                name     = {\translate[to=\UPlang]{Computation}}]
+                {computation}
+\declaretheorem[style   = definition,
+                sibling = theorem,
+                name    = {\translate[to=\UPlang]{Notation}}]
+                {notation}
+\declaretheorem[style = remark,
+                name  = {\translate[to=\UPlang]{Remark}}]
+                {remark}
+\declaretheorem[style   = remark,
+                sibling = remark,
+                name    = {\translate[to=\UPlang]{Remarks}}]
+                {remarks}
+
+
+\endinput
